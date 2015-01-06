@@ -11,7 +11,6 @@
 #   Defaults to the value of nova_host if unset.
 
 class quickstack::compute_common (
-  $admin_password               = $quickstack::params::admin_password,
   $amqp_host                    = $quickstack::params::amqp_host,
   $amqp_password                = $quickstack::params::amqp_password,
   $amqp_port                    = '5672',
