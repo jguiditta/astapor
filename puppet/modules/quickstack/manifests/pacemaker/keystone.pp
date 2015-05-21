@@ -15,7 +15,7 @@ class quickstack::pacemaker::keystone (
   $public_protocol                          = "http",
   $region                                   = "RegionOne",
   $token_driver                             = "keystone.token.persistence.backends.sql.Token",
-  $token_provider                           = "PKI",
+  $token_provider                           = "keystone.token.providers.pki.Provider",
   $use_syslog                               = "false",
   $log_facility                             = 'LOG_USER',
   $verbose                                  = 'false',

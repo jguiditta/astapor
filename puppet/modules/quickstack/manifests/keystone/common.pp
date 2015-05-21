@@ -62,7 +62,7 @@ class quickstack::keystone::common (
   $public_bind_host            = '0.0.0.0',
   $service_provider            = undef,
   $token_driver                = 'keystone.token.persistence.backends.sql.Token',
-  $token_provider              = 'PKI',
+  $token_provider              = 'keystone.token.providers.pki.Provider',
   $use_syslog                  = false,
   $verbose                     = false,
 ) {
@@ -96,7 +96,7 @@ class quickstack::keystone::common (
     rabbit_port           => $amqp_port,
     rabbit_hosts          => $rabbit_hosts,
     service_provider      => $service_provider,
-    databse_connection    => $sql_conn,
+    database_connection    => $sql_conn,
     token_driver          => $token_driver,
     token_provider        => $token_provider,
     use_syslog            => $use_syslog,
