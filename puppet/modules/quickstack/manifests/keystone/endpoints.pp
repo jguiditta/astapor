@@ -256,9 +256,9 @@ class quickstack::keystone::endpoints (
 
     # Setup the Keystone Identity Endpoint
     keystone::resource::service_identity {'identity_endpoint':
-      public_url   => $public_address,
-      admin_url    => $admin_real,
-      internal_url => $internal_real,
+      public_url   => "http://${public_address}:5000/v2.0",
+      admin_url    => "http://${admin_real}:35357/v2.0",
+      internal_url => "http://${internal_real}:5000/v2.0",
       region       => $region,
       service_type => 'identity',
     }
