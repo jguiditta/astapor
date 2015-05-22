@@ -43,6 +43,7 @@
 #  }
 
 class quickstack::keystone::common (
+  $admin_endpoint              = '127.0.0.1',
   $admin_token,
   $admin_bind_host             = '0.0.0.0',
   $amqp_host                   = 'localhost',
@@ -60,6 +61,7 @@ class quickstack::keystone::common (
   $idle_timeout                = '200',
   $log_facility                = 'LOG_USER',
   $public_bind_host            = '0.0.0.0',
+  $public_endpoint             = '127.0.0.1',
   $service_provider            = undef,
   $token_driver                = 'keystone.token.persistence.backends.sql.Token',
   $token_provider              = 'keystone.token.providers.pki.Provider',
@@ -83,7 +85,9 @@ class quickstack::keystone::common (
     keystone_config { 'DEFAULT/rabbit_port': ensure => absent }
   }
 
+  #FIXME: endpoint construction needs to be cleaned up and made more flexible
   class { '::keystone':
+    admin_endpoint        => "http://${admin_endpoint}:35357/",
     admin_token           => $admin_token,
     admin_bind_host       => $admin_bind_host,
     catalog_type          => 'sql',
@@ -92,6 +96,7 @@ class quickstack::keystone::common (
     database_idle_timeout => $idle_timeout,
     log_facility          => $log_facility,
     public_bind_host      => $public_bind_host,
+    public_endpoint       => "http://${public_endpoint}:5000/",
     rabbit_host           => $amqp_host,
     rabbit_port           => $amqp_port,
     rabbit_hosts          => $rabbit_hosts,

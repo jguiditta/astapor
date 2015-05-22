@@ -165,6 +165,7 @@ class quickstack::pacemaker::keystone (
       unless   => "/tmp/ha-all-in-one-util.bash i_am_vip $keystone_private_vip || /tmp/ha-all-in-one-util.bash property_exists keystone",
     } ->
     class {"::quickstack::keystone::common":
+      admin_endpoint   => map_params("keystone_admin_vip"),
       admin_token      => "$admin_token",
       admin_bind_host  => map_params("local_bind_addr"),
       amqp_host        => map_params("amqp_vip"),
@@ -182,6 +183,7 @@ class quickstack::pacemaker::keystone (
       idle_timeout     => "$idle_timeout",
       log_facility     => "$log_facility",
       public_bind_host => map_params("local_bind_addr"),
+      public_endpoint  => map_params("keystone_public_vip"),
       token_driver     => "$token_driver",
       token_provider   => "$token_provider",
       use_syslog       => str2bool_i("$use_syslog"),
